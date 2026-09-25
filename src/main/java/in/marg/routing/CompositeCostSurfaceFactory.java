@@ -48,23 +48,19 @@ public class CompositeCostSurfaceFactory {
                         maxLulcSamples);
 
         // Explicitly prepare flood raster before A*.
-        double rasterMarginDeg = 0.004;
+        double rasterMarginDeg = 0.01;
 
         double floodMinLat =
-                Math.max(region.minLat(),
-                        searchWindow.minLat() - rasterMarginDeg);
+                searchWindow.minLat() - rasterMarginDeg;
 
         double floodMinLon =
-                Math.max(region.minLon(),
-                        searchWindow.minLon() - rasterMarginDeg);
+                searchWindow.minLon() - rasterMarginDeg;
 
         double floodMaxLat =
-                Math.min(region.maxLat(),
-                        searchWindow.maxLat() + rasterMarginDeg);
+                searchWindow.maxLat() + rasterMarginDeg;
 
         double floodMaxLon =
-                Math.min(region.maxLon(),
-                        searchWindow.maxLon() + rasterMarginDeg);
+                searchWindow.maxLon() + rasterMarginDeg;
 
         var floodPreload =
                 floodRasterCache.preload(

@@ -124,15 +124,6 @@ public class CompositeRoutingController {
                         goal,
                         buffer);
 
-        BhuvanFloodRasterCache.PreloadResult floodPreload =
-        floodRasterCache.preload(
-                searchWindow.minLat(),
-                searchWindow.minLon(),
-                searchWindow.maxLat(),
-                searchWindow.maxLon(),
-                null,
-                null
-        );
 
         int maxSamples =
                 maxLulcSamples == null
