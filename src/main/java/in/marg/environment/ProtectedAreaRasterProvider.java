@@ -7,6 +7,7 @@ import org.geotools.geometry.Position2D;
 import org.geotools.referencing.CRS;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.geotools.api.coverage.PointOutsideCoverageException;
 
 import java.io.File;
 
@@ -134,6 +135,8 @@ public class ProtectedAreaRasterProvider {
 
             return value;
 
+        } catch (PointOutsideCoverageException e) {
+                return null;
         } catch (IllegalStateException e) {
             throw e;
 

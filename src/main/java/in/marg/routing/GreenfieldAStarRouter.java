@@ -81,6 +81,9 @@ public class GreenfieldAStarRouter {
             GeoPoint currentPoint = point(current, grid);
             for (Node next : neighbors(current, grid.rows(), grid.cols())) {
                 GeoPoint nextPoint = point(next, grid);
+                if (!searchWindow.contains(nextPoint)) {
+                    continue;
+                }
                 CostAssessment assessment = costCache.computeIfAbsent(next, n -> surface.assess(nextPoint));
                 if (assessment.blocked()) continue;
 
@@ -118,7 +121,7 @@ public class GreenfieldAStarRouter {
         Map<Node, CostAssessment> costCache = new HashMap<>();
 
         List<GeoPoint> unconstrained = weightedAStar(start, goal, surface, grid,
-                startNode, goalNode, 0.0, costCache);
+                startNode, goalNode, 0.0, costCache, searchWindow);
         if (routeLengthKm(unconstrained) <= maxRouteLengthKm + 1e-7) {
             return unconstrained;
         }
@@ -129,7 +132,7 @@ public class GreenfieldAStarRouter {
         final int maxBracketRuns = 12;
         for (int i = 0; i < maxBracketRuns; i++) {
             List<GeoPoint> path = weightedAStar(start, goal, surface, grid,
-                    startNode, goalNode, high, costCache);
+                    startNode, goalNode, high, costCache, searchWindow);
             WeightedPath candidate = evaluatePath(path, surface);
             if (candidate.physicalDistanceKm() <= maxRouteLengthKm + 1e-7) {
                 bestFeasible = candidate;
@@ -143,7 +146,7 @@ public class GreenfieldAStarRouter {
         if (bestFeasible == null) {
             List<GeoPoint> distanceBaseline = weightedAStar(start, goal,
                     new DistanceOnlyCostSurface(), grid,
-                    startNode, goalNode, 0.0, new HashMap<>());
+                    startNode, goalNode, 0.0, new HashMap<>(), searchWindow);
             if (routeLengthKm(distanceBaseline) <= maxRouteLengthKm + 1e-7) {
                 return distanceBaseline;
             }
@@ -155,7 +158,7 @@ public class GreenfieldAStarRouter {
         for (int i = 0; i < binaryIterations; i++) {
             double mid = (low + high) / 2.0;
             List<GeoPoint> path = weightedAStar(start, goal, surface, grid,
-                    startNode, goalNode, mid, costCache);
+                    startNode, goalNode, mid, costCache, searchWindow);
             WeightedPath candidate = evaluatePath(path, surface);
             if (candidate.physicalDistanceKm() <= maxRouteLengthKm + 1e-7) {
                 if (bestFeasible == null
@@ -174,10 +177,8 @@ public class GreenfieldAStarRouter {
     }
 
     private List<GeoPoint> weightedAStar(GeoPoint start, GeoPoint goal,
-                                         CostSurface surface, Grid grid,
-                                         Node startNode, Node goalNode,
-                                         double lambda,
-                                         Map<Node, CostAssessment> sharedCostCache) {
+        CostSurface surface, Grid grid, Node startNode, Node goalNode, 
+        double lambda, Map<Node, CostAssessment> sharedCostCache, StudyRegion searchWindow) {
         PriorityQueue<OpenEntry> open = new PriorityQueue<>(Comparator.comparingDouble(OpenEntry::f));
         Map<Node, Double> gScore = new HashMap<>();
         Map<Node, Node> cameFrom = new HashMap<>();
@@ -198,6 +199,9 @@ public class GreenfieldAStarRouter {
             GeoPoint currentPoint = point(current, grid);
             for (Node next : neighbors(current, grid.rows(), grid.cols())) {
                 GeoPoint nextPoint = point(next, grid);
+                if (!searchWindow.contains(nextPoint)) {
+                    continue;
+                }
                 CostAssessment assessment = sharedCostCache.computeIfAbsent(next,
                         n -> surface.assess(nextPoint));
                 if (assessment.blocked()) continue;
