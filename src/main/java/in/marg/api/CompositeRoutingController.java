@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import in.marg.floodraster.BhuvanFloodRasterCache;
+import in.marg.routing.CompositeRouteMetricsService;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -30,21 +30,22 @@ public class CompositeRoutingController {
     private final GreenfieldAStarRouter router;
     private final CoordinateProjection projection;
     private final CompositeCostSurfaceFactory factory;
+    private final CompositeRouteMetricsService routeMetrics;
 
     private final LulcRoutingProperties lulcProperties;
     private final FloodRoutingProperties floodProperties;
 
+
     private final double defaultCorridorBufferDeg;
     private final int defaultMaxLulcSamples;
-    private final BhuvanFloodRasterCache floodRasterCache;
 
     public CompositeRoutingController(
             StudyRegion region,
             GreenfieldAStarRouter router,
             CoordinateProjection projection,
             CompositeCostSurfaceFactory factory,
+            CompositeRouteMetricsService routeMetrics,
             LulcRoutingProperties lulcProperties,
-            BhuvanFloodRasterCache floodRasterCache,
             FloodRoutingProperties floodProperties,
             @Value("${marg.routing.corridor-buffer-deg:0.15}")
             double defaultCorridorBufferDeg,
@@ -55,13 +56,13 @@ public class CompositeRoutingController {
         this.router = router;
         this.projection = projection;
         this.factory = factory;
+        this.routeMetrics = routeMetrics;
         this.lulcProperties = lulcProperties;
         this.floodProperties = floodProperties;
         this.defaultCorridorBufferDeg =
                 defaultCorridorBufferDeg;
         this.defaultMaxLulcSamples =
                 defaultMaxLulcSamples;
-        this.floodRasterCache = floodRasterCache;
     }
 
     @GetMapping
@@ -203,12 +204,19 @@ public class CompositeRoutingController {
                         / baselineLengthKm)
                         - 1.0) * 100.0
                         : Double.NaN;
+        Map<String, Object> routeDiagnostics =
+                routeMetrics.summarize(route);
+
 
         var flood =
                 built.floodPreload().mosaic();
 
         Map<String, Object> metadata =
                 new LinkedHashMap<>();
+
+        metadata.put(
+                "routeDiagnostics",
+                routeDiagnostics);
 
         metadata.put(
                 "routingResolutionMeters",
