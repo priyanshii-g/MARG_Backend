@@ -1,0 +1,35 @@
+[
+  {
+    "id": "assam-lulc-50k-1516",
+    "title": "Assam Land Use / Land Cover 1:50,000 (2015-16)",
+    "serviceUrl": "https://bhuvan-vec2.nrsc.gov.in/bhuvan/wms",
+    "layerName": "lulc:AS_LULC50K_1516",
+    "crs": "EPSG:4326",
+    "format": "image/png"
+  },
+  {
+    "id": "assam-lulc-50k-1112",
+    "title": "Assam Land Use / Land Cover 1:50,000 (2011-12)",
+    "serviceUrl": "https://bhuvan-vec2.nrsc.gov.in/bhuvan/wms",
+    "layerName": "lulc:AS_LULC50K_1112",
+    "crs": "EPSG:4326",
+    "format": "image/png"
+  },
+  {
+    "id": "assam-lulc-50k-0506",
+    "title": "Assam Land Use / Land Cover 1:50,000 (2005-06)",
+    "serviceUrl": "https://bhuvan-vec2.nrsc.gov.in/bhuvan/wms",
+    "layerName": "lulc:AS_LULC50K_0506",
+    "crs": "EPSG:4326",
+    "format": "image/png"
+  },
+  {
+    "id": "assam-flood-hazard",
+    "title": "Assam Flood Hazard",
+    "serviceUrl": "https://bhuvan-ras2.nrsc.gov.in/cgi-bin/hazard.exe",
+    "layerName": "as_hz",
+    "crs": "EPSG:4326",
+    "format": "image/png",
+    "note": "Verify the live layer name before using as a numeric mask."
+  }
+]

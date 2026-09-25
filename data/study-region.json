@@ -1,0 +1,20 @@
+{
+  "name": "Kaziranga–Karbi Anglong, Assam",
+  "bbox": {
+    "minLat": 25.75,
+    "minLon": 93.10,
+    "maxLat": 26.65,
+    "maxLon": 93.75
+  },
+  "origin": {
+    "label": "A — Kohora Chariali area",
+    "lat": 26.58970,
+    "lon": 93.40035
+  },
+  "destination": {
+    "label": "B — Diphu area",
+    "lat": 25.84573,
+    "lon": 93.43781
+  },
+  "note": "Prototype points chosen for algorithm development; not a proposed highway alignment or construction recommendation."
+}

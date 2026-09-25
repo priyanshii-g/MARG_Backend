@@ -1,0 +1,12 @@
+# Runtime LULC policy is configured in src/main/resources/application.yml.
+# These values are documented here for research experiments.
+# They are MARG model parameters, not official Bhuvan/legal/regulatory values.
+LULC:
+  BUILT_UP: 1.5
+  FOREST: 0.8
+  WETLAND_WATER: 2.0
+  AGRICULTURE: 0.25
+  GRASS_GRAZING: 0.10
+  BARREN_WASTELAND: 0.0
+  SNOW: 2.5
+  UNKNOWN: 0.0

@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: marg-routing-prototype
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+marg:
+  study-region: kaziranga-karbi-anglong
+  routing:
+    corridor-buffer-deg: 0.15
+    # Internal routing grid. Coordinates are projected to UTM 46N before search.
+    resolution-meters: 250
+    utm-zone: 46
+    lulc:
+      # Dimensionless additive movement-cost contributions.
+      # 0 = no extra cost; values are MARG model parameters, not official land-use values.
+      penalties:
+        BUILT_UP: 1.5
+        FOREST: 0.8
+        WETLAND_WATER: 2.0
+        AGRICULTURE: 0.25
+        GRASS_GRAZING: 0.10
+        BARREN_WASTELAND: 0.0
+        SNOW: 2.5
+        UNKNOWN: 0.0
+  bhuvan:
+    lulc:
+      sample-resolution-deg: 0.01
+      query-half-size-deg: 0.004
+      parallelism: 6
+      cache-file: data/cache/bhuvan-lulc-samples.json
+      max-remote-samples: 4000

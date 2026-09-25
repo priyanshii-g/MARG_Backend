@@ -1,0 +1,71 @@
+{
+  "info": {
+    "name": "MARG - Kaziranga Karbi Anglong v0.5",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Study Region",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/study-region"
+      }
+    },
+    {
+      "name": "Bhuvan Layers",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/bhuvan/layers"
+      }
+    },
+    {
+      "name": "Bhuvan LULC Map URL",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/bhuvan/map-url/assam-lulc-50k-1516?minLon=93.10&minLat=25.75&maxLon=93.75&maxLat=26.65"
+      }
+    },
+    {
+      "name": "Bhuvan LULC Point Sample - A",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/bhuvan/lulc/sample?lat=26.5897&lon=93.40035"
+      }
+    },
+    {
+      "name": "Bhuvan LULC Cache",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/bhuvan/lulc/cache"
+      }
+    },
+    {
+      "name": "Route - Distance Baseline",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/routes?mode=distance"
+      }
+    },
+    {
+      "name": "Route - Bhuvan LULC Aware",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/routes?mode=lulc&resolutionMeters=250&corridorBufferDeg=0.15&maxRemoteSamples=4000"
+      }
+    },
+    {
+      "name": "Route - Compare",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/routes?mode=compare&resolutionMeters=250&corridorBufferDeg=0.15&maxRemoteSamples=4000"
+      }
+    },
+    {
+      "name": "Route - LULC \u2264 15% deviation",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8080/api/routes?mode=lulc&resolutionMeters=250&maxDeviationPercent=15"
+      }
+    }
+  ]
+}
