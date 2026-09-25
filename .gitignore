@@ -1,0 +1,91 @@
+# ==============================
+# Maven / Build Output
+# ==============================
+
+target/
+**/target/
+
+# Maven wrapper generated files
+.mvn/timing.properties
+
+# ==============================
+# IDE - IntelliJ IDEA
+# ==============================
+
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# ==============================
+# IDE - Eclipse / STS
+# ==============================
+
+.classpath
+.project
+.settings/
+
+# ==============================
+# VS Code
+# ==============================
+
+.vscode/
+
+# ==============================
+# Java
+# ==============================
+
+*.class
+*.jar
+*.war
+*.ear
+
+# ==============================
+# Logs
+# ==============================
+
+*.log
+logs/
+*.log.*
+
+# ==============================
+# OS generated files
+# ==============================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==============================
+# Temporary files
+# ==============================
+
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# ==============================
+# Environment / Secrets
+# ==============================
+
+.env
+.env.*
+!.env.example
+
+# ==============================
+# Application generated/cache data
+# ==============================
+
+data/cache/
+data/tmp/
+
+# ==============================
+# Local application files
+# ==============================
+
+*.local
+application-local.yml
+application-local.yaml
+application-local.properties

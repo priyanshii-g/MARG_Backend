@@ -30,6 +30,36 @@ marg:
         BARREN_WASTELAND: 0.0
         SNOW: 2.5
         UNKNOWN: 0.0
+    slope:
+      free-max-degrees: 5.0
+      low-max-degrees: 10.0
+      moderate-max-degrees: 15.0
+      steep-max-degrees: 25.0
+      very-steep-max-degrees: 30.0
+
+      low-penalty: 0.15
+      moderate-penalty: 0.40
+      steep-penalty: 1.00
+      very-steep-penalty: 2.00
+
+      block-no-data: true
+      block-above-very-steep: true
+
+    flood:
+      penalties:
+        VERY_LOW: 0.0
+        LOW: 0.20
+        MODERATE: 0.60
+        HIGH: 1.50
+        VERY_HIGH: 3.00
+        NOT_IN_HAZARD_LAYER: 0.0
+        UNKNOWN: 2.00
+
+  terrain:
+    slope-path: data/processed/dem/assam_slope_utm46.tif
+
+  protected-area:
+    raster-path: data/processed/protected-areas/assam_protected_area_mask_utm46.tif
   bhuvan:
     lulc:
       sample-resolution-deg: 0.01
@@ -37,3 +67,9 @@ marg:
       parallelism: 6
       cache-file: data/cache/bhuvan-lulc-samples.json
       max-remote-samples: 4000
+    flood-raster:
+      cache-directory: data/cache/bhuvan-flood-wms
+      tile-pixels: 512
+      target-pixels-per-degree: 1000
+      color-tolerance: 28
+      classification-window-radius: 1
